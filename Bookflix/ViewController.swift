@@ -8,40 +8,27 @@
 
 import UIKit
 
-let title = "Bookflix"
+class HomeController: UICollectionViewController {
 
-class ViewController: UIViewController {
-
-    var mainViewController = UIViewController()
-    var collectionViewController = UICollectionViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        initMainViewController()
+        navigationItem.title = "Home"
+        collectionView?.backgroundColor = UIColor.white
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        
     }
     
-    // msseo 190408 MainView = collectionView
-    func initMainViewController() {
-        mainViewController.title = title
-//        mainViewController.view.backgroundColor =  UIColor.red
-        self.view.addSubview(mainViewController.view)
-        
-        let rect = CGRect(x: 20, y: 100, width: 300, height: 100)
-        let label = UILabel(frame: rect)
-        label.text = title
-        label.font = UIFont.boldSystemFont(ofSize: 30.0)
-        
-        mainViewController.view.addSubview(label)
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
     }
     
-    func addCollectionView() {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
         
-        collectionViewController.view.backgroundColor = UIColor.blue
-        mainViewController.view.addSubview(collectionViewController.view)
+        cell.backgroundColor = UIColor.red
+        return cell
     }
-
-
 }
 
