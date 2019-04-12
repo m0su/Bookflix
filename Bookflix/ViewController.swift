@@ -9,19 +9,29 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationItem.title = "Home"
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        
+    
+    struct Book {
+        var title = String()
+        var price = String()
     }
     
+    var books = [Book(title: "스위프트 따라잡기", price: "10,000"),
+                 Book(title: "iOS 따라잡기", price: "20,000"),
+                 Book(title: "Objective-C 따라잡기", price: "15,000"),
+                 Book(title: "Xcode 따라잡기", price: "16,000"),
+                 Book(title: "AppStore 따라잡기", price: "18,000")]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // collectionView
+        navigationItem.title = "Bookflix"
+        collectionView?.backgroundColor = UIColor.white
+        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return books.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,11 +40,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        cell.backgroundColor = UIColor.red
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height:200)
+        return CGSize(width: view.frame.width / 3 - 10 , height:200)
     }
-    
 }
 
 class VideoCell: UICollectionViewCell {
@@ -134,6 +144,3 @@ extension UIView {
     }
     
 }
-
-
-
