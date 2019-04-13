@@ -9,11 +9,17 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+    let headerId = "headerId"
+    let cellId = "cellId"
+    
     
     struct Book {
         var title = String()
         var price = String()
     }
+    
+    
     
     var books = [Book(title: "스위프트 따라잡기", price: "10,000"),
                  Book(title: "iOS 따라잡기", price: "20,000"),
@@ -26,16 +32,27 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
         // collectionView
         navigationItem.title = "Bookflix"
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.backgroundColor = .white
+        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
+        
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     }
 
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: 50)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return books.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
 //        cell.backgroundColor = UIColor.red
         return cell
