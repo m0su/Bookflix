@@ -32,14 +32,32 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.title = "Bookflix"
         navigationController?.navigationBar.isTranslucent = false // 투명도 삭제
         
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        navigationItem.titleView = titleLabel
-        titleLabel.text = "Back"
-        titleLabel.textColor = .white
-//        titleLabel.font = UIFont.systemFontSize()
+//        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
+//        navigationItem.titleView = titleLabel
+//        titleLabel.text = "Back"
+//        titleLabel.textColor = .white
         
         collectionView?.backgroundColor = .white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
+        
+        collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        
+        setupMenuBar()
+    }
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    } ()
+    
+    // no other class should actually have access to this setup function.
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        
+        // 아래 설정을 하지 않으면 보이지 않음
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:|[v0(44)]|", views: menuBar)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

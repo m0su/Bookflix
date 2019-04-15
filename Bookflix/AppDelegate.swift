@@ -24,15 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // header NavigationBar
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green:32, blue:31)
         
-//        application.statusBarStyle = .lightContent
-//
-//        let statusBarBackgroundView = UIView()
-//        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 131, green:131, blue:31)
-//
-//        window?.addSubview(statusBarBackgroundView)
-//        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
-//        window?.addConstraintsWithFormat(format: "V:|[v0(20)]|", views: statusBarBackgroundView)
+        // get rid of black bar undernearth navbar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
+        /** 아이폰X 이상 모델에선 동일함. 8+ 이하에서 확인 필요.
+        application.statusBarStyle = .lightContent
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 131, green:131, blue:31)
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "V:|[v0(20)]|", views: statusBarBackgroundView)
+        */
         return true
     }
 
