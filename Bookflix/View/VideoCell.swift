@@ -1,68 +1,12 @@
 //
-//  ViewController.swift
+//  VideoCell.swift
 //  Bookflix
 //
-//  Created by SEO on 08/04/2019.
+//  Created by SEO on 15/04/2019.
 //  Copyright © 2019 SEO. All rights reserved.
 //
 
 import UIKit
-
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    let headerId = "headerId"
-    let cellId = "cellId"
-    
-    
-    struct Book {
-        var title = String()
-        var price = String()
-    }
-    
-    
-    
-    var books = [Book(title: "스위프트 따라잡기", price: "10,000"),
-                 Book(title: "iOS 따라잡기", price: "20,000"),
-                 Book(title: "Objective-C 따라잡기", price: "15,000"),
-                 Book(title: "Xcode 따라잡기", price: "16,000"),
-                 Book(title: "AppStore 따라잡기", price: "18,000")]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // collectionView
-        navigationItem.title = "Bookflix"
-        collectionView?.backgroundColor = .white
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
-        
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
-        return header
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 50)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return books.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        
-//        cell.backgroundColor = UIColor.red
-        return cell
-    }
-
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width / 3 - 10 , height:200)
-    }
-}
 
 class VideoCell: UICollectionViewCell {
     override init(frame: CGRect) {
@@ -72,36 +16,46 @@ class VideoCell: UICollectionViewCell {
     
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.blue
+        imageView.image = UIImage(named: "book_1920")
+        imageView.backgroundColor = .gray
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()
     
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.black
+        imageView.image = UIImage(named: "star_1280")
+        imageView.backgroundColor = .gray
+        imageView.layer.cornerRadius = 22
+        imageView.layer.masksToBounds = true
         
         return imageView
     }()
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.blue
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         
         return view
     } ()
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.yellow
+        //        label.backgroundColor = UIColor.yellow
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "이것은 제목"
+        
         return label
     } ()
     
     let subtitleTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = UIColor.gray
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = "이것은 내용내용내용 - 1,600"
+        textView.textColor = .gray
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
         return textView
     } ()
     
@@ -114,14 +68,14 @@ class VideoCell: UICollectionViewCell {
         
         addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]|", views: userProfileImageView)
-
+        
         // vertical constraints
         addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
-
+        
         addConstraintsWithFormat(format: "V:[v0(20)]", views: titleLabel)
         addConstraintsWithFormat(format: "H:[v0]", views: titleLabel)
-
+        
         // top constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
         // left constraint
@@ -130,7 +84,7 @@ class VideoCell: UICollectionViewCell {
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         // height constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
-
+        
         // top constraint
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
         // left constraint
@@ -146,18 +100,4 @@ class VideoCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension UIView {
-    func addConstraintsWithFormat(format: String, views: UIView...) {
-        
-        var viewsDictionary = [String: UIView]()
-        for (index, view) in views.enumerated() {
-            let key = "v\(index)"
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDictionary[key] = view
-        }
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, metrics: nil, views: viewsDictionary))
-    }
-    
 }

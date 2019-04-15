@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA133A4A2264547E000841E0 /* star_1280.png in Resources */ = {isa = PBXBuildFile; fileRef = AA133A492264547E000841E0 /* star_1280.png */; };
+		AA133A4E226458C9000841E0 /* book_1920.png in Resources */ = {isa = PBXBuildFile; fileRef = AA133A4D226458C9000841E0 /* book_1920.png */; };
+		AA133A5122646689000841E0 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA133A5022646689000841E0 /* Extentions.swift */; };
+		AA133A542264687C000841E0 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA133A532264687C000841E0 /* VideoCell.swift */; };
 		AABF4213225B3F5D008D2B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABF4212225B3F5D008D2B03 /* AppDelegate.swift */; };
-		AABF4215225B3F5D008D2B03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABF4214225B3F5D008D2B03 /* ViewController.swift */; };
+		AABF4215225B3F5D008D2B03 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABF4214225B3F5D008D2B03 /* HomeController.swift */; };
 		AABF4218225B3F5D008D2B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AABF4216225B3F5D008D2B03 /* Main.storyboard */; };
 		AABF421A225B3F5F008D2B03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AABF4219225B3F5F008D2B03 /* Assets.xcassets */; };
 		AABF421D225B3F5F008D2B03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AABF421B225B3F5F008D2B03 /* LaunchScreen.storyboard */; };
-		AADB4F75226193D000DD1295 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB4F74226193D000DD1295 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA133A492264547E000841E0 /* star_1280.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star_1280.png; path = Bookflix/Image/star_1280.png; sourceTree = "<group>"; };
+		AA133A4D226458C9000841E0 /* book_1920.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = book_1920.png; path = Bookflix/Image/book_1920.png; sourceTree = "<group>"; };
+		AA133A5022646689000841E0 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		AA133A532264687C000841E0 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		AABF420F225B3F5D008D2B03 /* Bookflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABF4212225B3F5D008D2B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AABF4214225B3F5D008D2B03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AABF4214225B3F5D008D2B03 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		AABF4217225B3F5D008D2B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AABF4219225B3F5F008D2B03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AABF421C225B3F5F008D2B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AABF421E225B3F5F008D2B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AADB4F74226193D000DD1295 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,11 +43,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA133A4F22646677000841E0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AA133A5022646689000841E0 /* Extentions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AA133A5222646868000841E0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA133A532264687C000841E0 /* VideoCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA133A552264689F000841E0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AABF4214225B3F5D008D2B03 /* HomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		AABF4206225B3F5D008D2B03 = {
 			isa = PBXGroup;
 			children = (
 				AABF4211225B3F5D008D2B03 /* Bookflix */,
 				AABF4210225B3F5D008D2B03 /* Products */,
+				AA133A492264547E000841E0 /* star_1280.png */,
+				AA133A4D226458C9000841E0 /* book_1920.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +88,14 @@
 		AABF4211225B3F5D008D2B03 /* Bookflix */ = {
 			isa = PBXGroup;
 			children = (
+				AA133A552264689F000841E0 /* Controller */,
+				AA133A5222646868000841E0 /* View */,
+				AA133A4F22646677000841E0 /* Helpers */,
 				AABF4212225B3F5D008D2B03 /* AppDelegate.swift */,
-				AABF4214225B3F5D008D2B03 /* ViewController.swift */,
 				AABF4216225B3F5D008D2B03 /* Main.storyboard */,
 				AABF4219225B3F5F008D2B03 /* Assets.xcassets */,
 				AABF421B225B3F5F008D2B03 /* LaunchScreen.storyboard */,
 				AABF421E225B3F5F008D2B03 /* Info.plist */,
-				AADB4F74226193D000DD1295 /* HeaderView.swift */,
 			);
 			path = Bookflix;
 			sourceTree = "<group>";
@@ -125,9 +158,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA133A4A2264547E000841E0 /* star_1280.png in Resources */,
 				AABF421D225B3F5F008D2B03 /* LaunchScreen.storyboard in Resources */,
 				AABF421A225B3F5F008D2B03 /* Assets.xcassets in Resources */,
 				AABF4218225B3F5D008D2B03 /* Main.storyboard in Resources */,
+				AA133A4E226458C9000841E0 /* book_1920.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AABF4215225B3F5D008D2B03 /* ViewController.swift in Sources */,
-				AADB4F75226193D000DD1295 /* HeaderView.swift in Sources */,
+				AA133A5122646689000841E0 /* Extentions.swift in Sources */,
+				AA133A542264687C000841E0 /* VideoCell.swift in Sources */,
+				AABF4215225B3F5D008D2B03 /* HomeController.swift in Sources */,
 				AABF4213225B3F5D008D2B03 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
