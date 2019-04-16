@@ -1,5 +1,5 @@
 //
-//  VideoCell.swift
+//  BookCell.swift
 //  Bookflix
 //
 //  Created by SEO on 15/04/2019.
@@ -23,7 +23,7 @@ class BaseCell: UICollectionViewCell {
     }
 }
 
-class VideoCell: BaseCell {
+class BookCell: BaseCell {
     
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()

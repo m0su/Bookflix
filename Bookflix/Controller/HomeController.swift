@@ -10,40 +10,57 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    
     let cellId = "cellId"
     
-    struct Book {
-        var title = String()
-        var price = String()
-    }
-    
-    var books = [Book(title: "스위프트 따라잡기", price: "10,000"),
-                 Book(title: "iOS 따라잡기", price: "20,000"),
-                 Book(title: "Objective-C 따라잡기", price: "15,000"),
-                 Book(title: "Xcode 따라잡기", price: "16,000"),
-                 Book(title: "AppStore 따라잡기", price: "18,000")]
+    var books: [Book] = {
+        var blankSpacebook = Book()
+        blankSpacebook.title = "스위프트 따라잡기"
+        blankSpacebook.thumbnailImageName = "스위프트"
+        return [blankSpacebook]
+    } ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
         // collectionView
         navigationItem.title = "Bookflix"
         navigationController?.navigationBar.isTranslucent = false // 투명도 삭제
         
-//        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-//        navigationItem.titleView = titleLabel
-//        titleLabel.text = "Back"
-//        titleLabel.textColor = .white
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
+        navigationItem.titleView = titleLabel
+        titleLabel.text = "Back"
+        titleLabel.textColor = .white
         
         collectionView?.backgroundColor = .white
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(BookCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         
         setupMenuBar()
+        setupNavBarButtons()
+    }
+    
+    func setupNavBarButtons() {
+//        let searchImage = UIImage(named: "search_icon")?.withRenderingMode(.alwaysOriginal)
+//        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+//        
+//        let moreButton = UIBarButtonItem(image: UIImage(named: "search_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
+        
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleMore))
+        let play = UIBarButtonItem(title: "Q", style: .plain, target: self, action: #selector(handleSearch))
+        
+        navigationItem.rightBarButtonItems = [add, play]
+//        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
+    }
+    
+    @objc func handleSearch() {
+        print(123)
+    }
+    
+    @objc func handleMore() {
+        print(1234)
     }
     
     let menuBar: MenuBar = {
