@@ -10,15 +10,30 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    
     let cellId = "cellId"
     
     var books: [Book] = {
+        var myLibrary = Library()
+        myLibrary.name = "Bestlibrary"
+        myLibrary.profileImageName = "star_1280"
+        
         var blankSpacebook = Book()
         blankSpacebook.title = "스위프트 따라잡기"
-        blankSpacebook.thumbnailImageName = "스위프트"
-        return [blankSpacebook]
+        blankSpacebook.thumbnailImageName = "book_1920"
+        blankSpacebook.library = myLibrary
+        blankSpacebook.numberOfViews = 12312321231232
+        
+        var badBloodBook = Book()
+        badBloodBook.title = "Objective-C와 Swift의 차이점을 알아봅시다."
+        badBloodBook.thumbnailImageName = " book_1920"
+        badBloodBook.library = myLibrary
+        badBloodBook.numberOfViews = 321321
+        
+        return [blankSpacebook, badBloodBook]
     } ()
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +97,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BookCell
+        
+        cell.book = books[indexPath.item]
         
 //        cell.backgroundColor = UIColor.red
         return cell
@@ -91,6 +108,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (view.frame.width - 16 - 16) * 9 / 16
-        return CGSize(width: view.frame.width , height:height + 16 + 68) // 68: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|"
+        return CGSize(width: view.frame.width , height:height + 16 + 88) // 68: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|"
     }
 }

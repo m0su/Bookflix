@@ -9,6 +9,15 @@
 import UIKit
 
 class Book: NSObject {
-    var thumbnailImageName: String?
     var title: String?
+    var thumbnailImageName: String?
+    var numberOfViews: NSNumber?
+    var uploadDate: NSDate?
+    
+    var library: Library?
+}
+
+class Library: NSObject {
+    var name: String?
+    var profileImageName: String?
 }

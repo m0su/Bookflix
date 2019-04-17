@@ -25,11 +25,48 @@ class BaseCell: UICollectionViewCell {
 
 class BookCell: BaseCell {
     
+    var book: Book? {
+        didSet {
+            titleLabel.text = book?.title
+            thumbnailImageView.image = UIImage(named: (book?.thumbnailImageName)!)
+            
+            userProfileImageView.image = UIImage(named: (book?.library?.profileImageName)!)
+            
+            if let profileImageName = book?.library?.profileImageName {
+                userProfileImageView.image = UIImage(named: profileImageName)
+                
+                if let libraryName = book?.library?.name, let numberOfViews = book?.numberOfViews {
+                    
+                    let numberFormatter = NumberFormatter()
+                    numberFormatter.numberStyle = .decimal
+                    
+                    let subtitleText = "\(libraryName) / view \(numberFormatter.string(from: numberOfViews)!) / 2 years ago"
+                    subtitleTextView.text = subtitleText
+                }
+            }
+            
+            //measure title text
+            if let title = book?.title {
+                let size = CGSize(width: frame.width - 16 - 44 - 8 - 16, height: 1000)
+                let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+                let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil)
+                
+                if estimatedRect.size.height > 20 {
+                    titleLabelHeightConstraint?.constant = 44
+                } else {
+                    titleLabelHeightConstraint?.constant = 20
+                }
+                
+            }
+            
+        }
+    }
+    
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "book_1920")
         imageView.backgroundColor = .gray
-        imageView.contentMode = .scaleAspectFill
+//        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
         return imageView
@@ -37,7 +74,7 @@ class BookCell: BaseCell {
     
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "star_1280")
+//        imageView.image = UIImage(named: "star_1280")
         imageView.backgroundColor = .gray
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
@@ -54,9 +91,10 @@ class BookCell: BaseCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        //        label.backgroundColor = UIColor.yellow
+        label.backgroundColor = .yellow
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "이것은 제목"
+        label.numberOfLines = 2
         
         return label
     } ()
@@ -70,6 +108,8 @@ class BookCell: BaseCell {
         return textView
     } ()
     
+    var titleLabelHeightConstraint: NSLayoutConstraint?
+    
     override func setupViews() {
         addSubview(thumbnailImageView)
         addSubview(separatorView)
@@ -81,7 +121,7 @@ class BookCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]|", views: userProfileImageView)
         
         // vertical constraints
-        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
         
         addConstraintsWithFormat(format: "V:[v0(20)]", views: titleLabel)
@@ -94,16 +134,17 @@ class BookCell: BaseCell {
         // right constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         // height constraint
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        titleLabelHeightConstraint = NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 44)
+        addConstraint(titleLabelHeightConstraint!)
         
         // top constraint
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 4))
         // left constraint
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         // right constraint
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         // height constraint
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
         
     }
