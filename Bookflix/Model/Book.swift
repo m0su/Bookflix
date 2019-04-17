@@ -8,16 +8,20 @@
 
 import UIKit
 
-class Book: NSObject {
-    var title: String?
-    var thumbnailImageName: String?
-    var numberOfViews: NSNumber?
-    var uploadDate: NSDate?
+class Book: Decodable {
     
-    var library: Library?
+    var title, subtitle, isbn13, price: String?
+    var imageURL: String?
+    var url: String?
+    
+//    var library: BookListFromJSON?
+    
+//    required init(from decoder: Decoder) throws {
+//    
+//    }
 }
 
-class Library: NSObject {
-    var name: String?
-    var profileImageName: String?
+class BookListFromJSON: Decodable {
+    var error, total: String?
+    var books: [Book]?
 }

@@ -28,22 +28,22 @@ class BookCell: BaseCell {
     var book: Book? {
         didSet {
             titleLabel.text = book?.title
-            thumbnailImageView.image = UIImage(named: (book?.thumbnailImageName)!)
+//            thumbnailImageView.image = UIImage(named: (book?.imageURL)!)
             
-            userProfileImageView.image = UIImage(named: (book?.library?.profileImageName)!)
+//            userProfileImageView.image = UIImage(named: (book?.library?.profileImageName)!)
             
-            if let profileImageName = book?.library?.profileImageName {
-                userProfileImageView.image = UIImage(named: profileImageName)
-                
-                if let libraryName = book?.library?.name, let numberOfViews = book?.numberOfViews {
-                    
-                    let numberFormatter = NumberFormatter()
-                    numberFormatter.numberStyle = .decimal
-                    
-                    let subtitleText = "\(libraryName) / view \(numberFormatter.string(from: numberOfViews)!) / 2 years ago"
+//            if let profileImageName = book?.library?.profileImageName {
+//                userProfileImageView.image = UIImage(named: profileImageName)
+//
+                if let libraryName = book?.subtitle, let price = book?.price {
+//
+//                    let numberFormatter = NumberFormatter()
+//                    numberFormatter.numberStyle = .decimal
+//
+                    let subtitleText = "\(libraryName) / view \(price) / 2 years ago"
                     subtitleTextView.text = subtitleText
                 }
-            }
+//            }
             
             //measure title text
             if let title = book?.title {

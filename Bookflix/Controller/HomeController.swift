@@ -9,34 +9,57 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
     let cellId = "cellId"
     
-    var books: [Book] = {
-        var myLibrary = Library()
-        myLibrary.name = "Bestlibrary"
-        myLibrary.profileImageName = "star_1280"
-        
-        var blankSpacebook = Book()
-        blankSpacebook.title = "스위프트 따라잡기"
-        blankSpacebook.thumbnailImageName = "book_1920"
-        blankSpacebook.library = myLibrary
-        blankSpacebook.numberOfViews = 12312321231232
-        
-        var badBloodBook = Book()
-        badBloodBook.title = "Objective-C와 Swift의 차이점을 알아봅시다."
-        badBloodBook.thumbnailImageName = " book_1920"
-        badBloodBook.library = myLibrary
-        badBloodBook.numberOfViews = 321321
-        
-        return [blankSpacebook, badBloodBook]
-    } ()
+    var books: [Book]? // = {
+//        var myLibrary = Library()
+//        myLibrary.name = "Bestlibrary"
+//        myLibrary.profileImageName = "star_1280"
+//
+//        var blankSpacebook = Book()
+//        blankSpacebook.title = "스위프트 따라잡기"
+//        blankSpacebook.imageURL = "book_1920"
+//        blankSpacebook.library = myLibrary
+//        blankSpacebook.numberOfViews = 12312321231232
+//
+//        var badBloodBook = Book()
+//        badBloodBook.title = "Objective-C와 Swift의 차이점을 알아봅시다."
+//        badBloodBook.imageURL = " book_1920"
+//        badBloodBook.library = myLibrary
+//        badBloodBook.numberOfViews = 321321
+//
+//        return [blankSpacebook, badBloodBook]
+//    } ()
     
-    
+    func fetchBooks() {
+        let jsonUrlString = "https://api.itbook.store/1.0/new"
+        guard let url = URL(string: jsonUrlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let dictionary = try JSONDecoder().decode(BookListFromJSON.self, from: data) // swift 4
+                self.books = dictionary.books!
+                dump(self.books)
+                self.collectionView.reloadData()
+                
+            } catch let jsonErr {
+                print(jsonErr.localizedDescription)
+            }
+            
+        }.resume()
+        
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchBooks()
         
         // collectionView
         navigationItem.title = "Bookflix"
@@ -55,6 +78,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setupMenuBar()
         setupNavBarButtons()
+        
     }
     
     func setupNavBarButtons() {
@@ -93,13 +117,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return books.count
+        return books?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BookCell
         
-        cell.book = books[indexPath.item]
+        cell.book = books?[indexPath.item]
         
 //        cell.backgroundColor = UIColor.red
         return cell
