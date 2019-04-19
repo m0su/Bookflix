@@ -132,6 +132,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (view.frame.width - 16 - 16) * 9 / 16
-        return CGSize(width: view.frame.width , height:height + 16 + 88) // 68: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|"
+        return CGSize(width: view.frame.width / 2 - 10 , height:height + 16 + 88) // 68: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|"
     }
 }
